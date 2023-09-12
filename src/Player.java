@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.util.Scanner;
-
 public class Player {
 	private Token token;
 	private Board board;
