@@ -1,12 +1,13 @@
-import java.util.Iterator;
 
 public class Board {
 	private final int numberOfRows = 6;
 	private final int numberOfColumns = 7;
 	private Token tokens[][];
-
-	public Board() {
+	private View view;
+	
+	public Board(View view) {
 		tokens = new Token[numberOfRows][numberOfColumns];
+		this.view=view;
 	}
 
 	public void iniciateBoard() {
@@ -18,8 +19,8 @@ public class Board {
 	}
 
 	public boolean isConnect4(Token tokenSeach) {
-		boolean out = checkHorizontal(tokenSeach) || checkVertical(tokenSeach);
-		out = out || checkAscendDiagonal(tokenSeach) || checkDescendDiagonal(tokenSeach);
+		boolean out = checkHorizontal(tokenSeach) || checkVertical(tokenSeach)
+				   || checkAscendDiagonal(tokenSeach) || checkDescendDiagonal(tokenSeach);
 		return out;
 	}
 
@@ -95,7 +96,7 @@ public class Board {
 
 	private int firtsEmptyRow(int column) throws Connect4Exception {
 		for (int i = 0; i < numberOfRows; i++) {
-			if (tokens[i][column] == Token.NULL_TOKEN) {
+			if (tokens[i][column].isNull()) {
 				return i;
 			}
 		}
@@ -103,31 +104,41 @@ public class Board {
 	}
 
 	public void printBoard() {
-		System.out.println();
+		this.view.writeln();
+		
+		printBoardRows();
+		
+		this.view.write("  ");
+		
+		printBoardFooter();
+		
+		this.view.writeln();
+	}
+	private void printBoardRows() {
 		for (int i = numberOfRows - 1; i >= 0; i--) {
-			System.out.print(i);
-			System.out.print("|");
+			this.view.write(i);
+			this.view.write("|");
 			printBoardRow(i);
-			System.out.println();
+			this.view.writeln();
 		}
-		System.out.print("  ");
+	}
+	private void printBoardRow(int idRow) {
 		for (int i = 0; i < numberOfColumns; i++) {
-			System.out.print(i);
-			System.out.print("|");
+			this.view.write(tokens[idRow][i].toString());
+			this.view.write("|");
 		}
-		System.out.println();
+	}
+	private void  printBoardFooter() {
+		for (int i = 0; i < numberOfColumns; i++) {
+			this.view.write(i);
+			this.view.write("|");
+		}
 	}
 
-	public void printBoardRow(int idRow) {
-		for (int i = 0; i < numberOfColumns; i++) {
-			System.out.print(tokens[idRow][i].toString());
-			System.out.print("|");
-		}
-	}
 	public boolean isCompleted() {
 		for (int i = 0; i < numberOfRows; i++) {
 			for (int j = 0; j < numberOfColumns; j++) {
-				if (tokens[i][j]==Token.NULL_TOKEN){
+				if (tokens[i][j].isNull()) {
 					return false;
 				}
 			}

@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Random;
 
 public class Turn {
@@ -7,16 +6,12 @@ public class Turn {
 	private Player players[];
 	private Board board;
 	private Player currentPlayer;
+	private View view;
 
-	public Turn(Board board) {
+	public Turn(Board board,View view) {
 		this.board = board;
+		this.view=view;
 		createPlayers();
-	}
-
-	private void printEndMessage(boolean isConnect4, boolean boardCompled) {
-		if (isConnect4) {
-			System.out.print("Congratue");
-		}
 	}
 
 	public void changeTurnPlayer() {
@@ -33,8 +28,8 @@ public class Turn {
 
 	private void createPlayers() {
 		players = new Player[NUMBER_PLAYERS];
-		players[0] = new Player(Token.X_TOKEN, this.board);
-		players[1] = new Player(Token.O_TOKEN, this.board);
+		players[0] = new Player(Token.X_TOKEN, this.board,this.view);
+		players[1] = new Player(Token.O_TOKEN, this.board,this.view);
 	}
 
 	public void setFirstPlayer() {
@@ -46,11 +41,8 @@ public class Turn {
 	public void play() {
 		try {
 			currentPlayer.put();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Connect4Exception e) {
-			// ASKME como tratamos estas excepciones o no lanzamos excepciones
-			System.out.println("Error, Try again "+e.getMessage());
+		} catch (Exception e) {
+			view.writeError(e.getMessage());
 			this.play();
 		}
 	}

@@ -1,6 +1,7 @@
 
 public enum Token {
-	X_TOKEN,O_TOKEN,NULL_TOKEN;
+	X_TOKEN, O_TOKEN, NULL_TOKEN;
+
 	public String toString() {
 		switch (this) {
 		case X_TOKEN: {
@@ -16,4 +17,8 @@ public enum Token {
 			throw new IllegalArgumentException("Unexpected value: " + this);
 		}
 	}
-}	
+
+	public boolean isNull() {
+		return this == NULL_TOKEN;
+	}
+}

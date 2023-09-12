@@ -1,13 +1,15 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-public class  Player{
+public class Player {
 	private Token token;
 	private Board board;
+	private View view;
 
-	public Player(Token token, Board board) {
+	public Player(Token token, Board board, View view) {
 		this.token = token;
 		this.board = board;
+		this.view = view;
 	}
 
 	public Token getToken() {
@@ -16,14 +18,14 @@ public class  Player{
 
 	public void put() throws Connect4Exception, IOException {
 		int column;
-			column = getCoordinatesToPut();
-			board.put(column, token);	
+		column = getCoordinatesToPut();
+		board.put(column, token);
 	}
 
-	private int getCoordinatesToPut() throws IOException {
+	private int getCoordinatesToPut() {
 		int column;
-		System.out.println("Player " + token.toString() + " is your turn, write a column:");
-		column = (new Scanner(System.in)).nextInt();
+		view.writeln("Player " + token.toString() + " is your turn, write a column:");
+		column = view.readInt();
 		return column;
 	}
 }
