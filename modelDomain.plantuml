@@ -1,0 +1,50 @@
+@startuml
+!theme mars
+
+skin rose
+
+title Classes - Class Diagram
+
+
+class Juego
+class Tablero
+class Jugador
+class Turno
+
+class Movimiento
+class Columna
+
+class Ficha
+class TipoFicha
+
+class Objetivo
+class Horizontal
+class Vertical
+class DiagonalDerechaIzq
+class DiagonalIzquierdaDerecha
+
+
+Juego -- Tablero :1
+Juego-- Jugador :2
+Juego -- Turno :N
+Jugador--Tablero
+Tablero -- Columna
+
+Columna--Fila
+Fila --Ficha
+Ficha-- TipoFicha
+
+Jugador <--  Turno
+
+
+Objetivo  ^-- Horizontal
+Objetivo  ^-- Vertical
+Objetivo  ^-- DiagonalDerechaIzq
+Objetivo  ^-- DiagonalIzquierdaDerecha
+
+Jugador --> Objetivo
+Jugador --> Movimiento
+Movimiento --> Tablero
+Movimiento --> Columna
+
+@enduml
