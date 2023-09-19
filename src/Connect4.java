@@ -1,58 +1,65 @@
-
 public class Connect4 {
-	private Board board;
-	private Turn turn;
-	private View view;
-	public Connect4() {
-		this.view = Console.getInstance();
-		this.board = new Board(this.view);
-		this.turn = new Turn(this.board,this.view);
-	}
+    private Board board;
+    private Turn turn;
+    private View view;
 
-	public static void main(String[] args) {
-		new Connect4().play();
-	}
+    public Connect4() {
+        this.view = Console.getInstance();
+        this.board = new Board(this.view);
+        this.turn = new Turn(this.board, this.view);
+    }
 
-	public void play() {
+    public static void main(String[] args) {
+        new Connect4().play();
+    }
 
-		boolean isConnect4 = false;
-		boolean boardCompled = false;
+    public void play() {
 
-		board.iniciateBoard();
-		turn.setFirstPlayer();
-		board.printBoard();
-		do {
-			turn.play();
+        boolean isConnect4 = false;
+        boolean boardCompled = false;
 
-			board.printBoard();
-			isConnect4 = board.isConnect4(turn.currentToken());
+        board.iniciateBoard();
+        turn.setFirstPlayer();
+        board.printBoard();
+        do {
+            turn.play();
 
-			if (!isConnect4) {
-				turn.changeTurnPlayer();
-			}
+            board.printBoard();
+            isConnect4 = board.isConnect4(turn.currentToken());
 
-			boardCompled = board.isCompleted();
-		} while (!isConnect4 && !boardCompled);
+            if (!isConnect4) {
+                turn.changeTurnPlayer();
+            }
 
-		printEndMessage(isConnect4);
-		askNewPlay();
+            boardCompled = board.isCompleted();
+        } while (!isConnect4 && !boardCompled);
 
-	}
+        printEndMessage(isConnect4);
 
-	private void printEndMessage(boolean isConnect4) {
-		if (isConnect4) {
-			System.out.println("Congratulations player " + turn.currentToken() + " you won!!");
-		} else {
-			System.out.println("Draw well played!!");
-		}
-	}
+        if (newPlay()) {
+            play();
+        }
 
-	private void askNewPlay() {
-		System.out.println("Do you want to play othertime? Y/N");
-		/**
-		 * String in=System.in.read(null) if (in.equals("Y")) { this.play(); }else {
-		 * System.out.println("See you next time"); }
-		 **/
-	}
+    }
+
+    private void printEndMessage(boolean isConnect4) {
+        if (isConnect4) {
+            view.writeln("Congratulations player " + turn.currentToken() + " you won!!");
+        } else {
+            view.writeln("Draw well played!!");
+        }
+    }
+
+    private boolean newPlay() {
+        String answer;
+        view.writeln("Do you want to play othertime? Y/N");
+        answer = view.readString().toUpperCase();
+
+        if (answer.equals("Y") || answer.equals("YES")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
