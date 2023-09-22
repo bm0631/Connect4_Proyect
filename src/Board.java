@@ -5,14 +5,14 @@ public class Board {
     private View view;
 
     public Board(View view) {
-        tokens = new Token[numberOfRows][numberOfColumns];
+        this.tokens = new Token[numberOfRows][numberOfColumns];
         this.view = view;
     }
 
     public void setBoardAsClean() {
         for (int x = 0; x < numberOfColumns; x++) {
             for (int y = 0; y < numberOfRows; y++) {
-                tokens[y][x] = Token.NULL_TOKEN;
+                this.tokens[y][x] = Token.NULL_TOKEN;
             }
         }
     }
@@ -24,7 +24,7 @@ public class Board {
         boolean isConnect4 = false;
         for (int row = 0; row < numberOfRows; row++) {
             for (int column = 0; column < numberOfColumns; column++) {
-                if (tokenSeach == tokens[row][column]) {
+                if (tokenSeach == this.tokens[row][column]) {
                     isConnect4 = checkHorizontal(row, column, tokenSeach) || checkVertical(row, column, tokenSeach)
                             || checkAscendDiagonal(row, column, tokenSeach) || checkDescendDiagonal(row, column, tokenSeach);
 
@@ -38,9 +38,9 @@ public class Board {
 
     private boolean checkHorizontal(int row, int column, Token tokenSeach) {
         if (column + 3 < numberOfColumns) {
-            return tokenSeach == tokens[row][column + 1] &&
-                    tokenSeach == tokens[row][column + 2] &&
-                    tokenSeach == tokens[row][column + 3];
+            return tokenSeach == this.tokens[row][column + 1] &&
+                    tokenSeach == this.tokens[row][column + 2] &&
+                    tokenSeach == this.tokens[row][column + 3];
         } else {
             return false;
         }
@@ -48,9 +48,9 @@ public class Board {
 
     private boolean checkVertical(int row, int column, Token tokenSeach) {
         if (row + 3 < numberOfRows) {
-            return tokenSeach == tokens[row + 1][column] &&
-                    tokenSeach == tokens[row + 2][column] &&
-                    tokenSeach == tokens[row + 3][column];
+            return tokenSeach == this.tokens[row + 1][column] &&
+                    tokenSeach == this.tokens[row + 2][column] &&
+                    tokenSeach == this.tokens[row + 3][column];
         } else {
             return false;
         }
@@ -58,9 +58,9 @@ public class Board {
 
     private boolean checkAscendDiagonal(int row, int column, Token tokenSeach) {
         if (row + 3 < numberOfRows && column + 3 < numberOfColumns) {
-            return tokenSeach == tokens[row + 1][column + 1] &&
-                    tokenSeach == tokens[row + 2][column + 2] &&
-                    tokenSeach == tokens[row + 3][column + 3];
+            return tokenSeach == this.tokens[row + 1][column + 1] &&
+                    tokenSeach == this.tokens[row + 2][column + 2] &&
+                    tokenSeach == this.tokens[row + 3][column + 3];
         } else {
             return false;
         }
@@ -68,9 +68,9 @@ public class Board {
 
     private boolean checkDescendDiagonal(int row, int column, Token tokenSeach) {
         if (row + 3 < numberOfRows && column - 3 >= 0) {
-            return tokenSeach == tokens[row + 1][column - 1] &&
-                    tokenSeach == tokens[row + 2][column - 2] &&
-                    tokenSeach == tokens[row + 3][column - 3];
+            return tokenSeach == this.tokens[row + 1][column - 1] &&
+                    tokenSeach == this.tokens[row + 2][column - 2] &&
+                    tokenSeach == this.tokens[row + 3][column - 3];
         } else {
             return false;
         }
@@ -81,12 +81,12 @@ public class Board {
             throw new Connect4Exception("Out of range error ");
         }
         int row = firtsEmptyRow(column);
-        tokens[row][column] = tokenToPut;
+        this.tokens[row][column] = tokenToPut;
     }
 
     private int firtsEmptyRow(int column) throws Connect4Exception {
         for (int i = 0; i < numberOfRows; i++) {
-            if (tokens[i][column].isNull()) {
+            if (this.tokens[i][column].isNull()) {
                 return i;
             }
         }
@@ -116,7 +116,7 @@ public class Board {
 
     private void printBoardRow(int idRow) {
         for (int i = 0; i < numberOfColumns; i++) {
-            this.view.write(tokens[idRow][i].toString());
+            this.view.write(this.tokens[idRow][i].toString());
             this.view.write("|");
         }
     }
@@ -131,7 +131,7 @@ public class Board {
     public boolean isCompleted() {
         for (int i = 0; i < numberOfRows; i++) {
             for (int j = 0; j < numberOfColumns; j++) {
-                if (tokens[i][j].isNull()) {
+                if (this.tokens[i][j].isNull()) {
                     return false;
                 }
             }
