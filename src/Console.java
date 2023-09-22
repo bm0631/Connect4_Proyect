@@ -28,13 +28,14 @@ public class Console implements View {
 
     public int readInt() {
         int input = -1;
-        try {
-            input = scanner.nextInt();
-
-        } catch (Exception exception) {
-            System.out.println("Error, Try again " + exception.getMessage());
-            readInt();
-        }
+        do {
+            try {
+                input = scanner.nextInt();
+            } catch (Exception exception) {
+                System.out.println("Error, Try again " + exception.getMessage());
+                scanner.next();
+            }
+        } while (input < -1);
         return input;
     }
 
