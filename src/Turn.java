@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class Turn {
@@ -11,38 +12,37 @@ public class Turn {
     public Turn(Board board, View view) {
         this.board = board;
         this.view = view;
-        createPlayers();
+        this.createPlayers();
     }
 
     public void changeTurnPlayer() {
-        if (currentPlayer == players[0]) {
-            this.currentPlayer = players[1];
-        } else {
-            this.currentPlayer = players[0];
-        }
+    if (this.players.length > 0) {
+        int nextIndex = (Arrays.asList(this.players).indexOf(this.currentPlayer) + 1) % this.players.length;
+        this.currentPlayer = this.players[nextIndex];
     }
+}
 
     public Token currentToken() {
-        return currentPlayer.getToken();
+        return this.currentPlayer.getToken();
     }
 
     private void createPlayers() {
-        players = new Player[NUMBER_PLAYERS];
-        players[0] = new Player(Token.X_TOKEN, this.board, this.view);
-        players[1] = new Player(Token.O_TOKEN, this.board, this.view);
+        this.players = new Player[NUMBER_PLAYERS];
+        this.players[0] = new Player(Token.X_TOKEN, this.board, this.view);
+        this.players[1] = new Player(Token.O_TOKEN, this.board, this.view);
     }
 
     public void setFirstPlayer() {
         int firstIdPlayer;
         firstIdPlayer = randomPlayer();
-        this.currentPlayer = players[firstIdPlayer];
+        this.currentPlayer = this.players[firstIdPlayer];
     }
 
     public void play() {
         try {
-            currentPlayer.put();
+            this.currentPlayer.put();
         } catch (Exception e) {
-            view.writeError(e.getMessage());
+            this.view.writeError(e.getMessage());
             this.play();
         }
     }
