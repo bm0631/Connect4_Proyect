@@ -28,8 +28,9 @@ public class Turn {
 
     private void createPlayers() {
         this.players = new Player[NUMBER_PLAYERS];
-        this.players[0] = new Player(Token.X_TOKEN, this.board, this.view);
-        this.players[1] = new Player(Token.O_TOKEN, this.board, this.view);
+        for (int i = 0; i < players.length; i++) {
+             this.players[i] = new Player(Token.getTokenIndex(i), this.board, this.view);
+        }
     }
 
     public void setFirstPlayer() {

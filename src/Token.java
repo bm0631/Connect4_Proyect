@@ -20,4 +20,16 @@ public enum Token {
     public boolean isNull() {
         return this == NULL_TOKEN;
     }
+    public static Token getTokenIndex(int i){
+         switch (i) {
+            case 0: {
+                return Token.X_TOKEN;
+            }
+            case 1: {
+                return Token.O_TOKEN;
+            }
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + i);
+        }
+    }
 }
