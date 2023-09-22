@@ -34,7 +34,7 @@ public class Turn {
 
     public void setFirstPlayer() {
         int firstIdPlayer;
-        firstIdPlayer = randomPlayer();
+        firstIdPlayer = this.randomPlayer();
         this.currentPlayer = this.players[firstIdPlayer];
     }
 

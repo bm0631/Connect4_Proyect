@@ -12,19 +12,19 @@ public class Player {
     }
 
     public Token getToken() {
-        return token;
+        return this.token;
     }
 
     public void put() throws Connect4Exception, IOException {
         int column;
-        column = getCoordinatesToPut();
-        board.put(column, token);
+        column = this.getCoordinatesToPut();
+        this.board.put(column, this.token);
     }
 
     private int getCoordinatesToPut() {
         int column;
-        view.writeln("Player " + token.toString() + " is your turn, write a column:");
-        column = view.readInt();
+        this.view.writeln("Player " + this.token.toString() + " is your turn, write a column:");
+        column = this.view.readInt();
         return column;
     }
 }
