@@ -9,7 +9,7 @@ public class Board {
         this.view = view;
     }
 
-    public void iniciateBoard() {
+    public void setBoardAsClean() {
         for (int x = 0; x < numberOfColumns; x++) {
             for (int y = 0; y < numberOfRows; y++) {
                 tokens[y][x] = Token.NULL_TOKEN;

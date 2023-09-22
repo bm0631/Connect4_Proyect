@@ -10,51 +10,20 @@ public class Connect4 {
     }
 
     public static void main(String[] args) {
-        new Connect4().play();
+        Connect4 connect4 = new Connect4();
+        connect4.play();
     }
 
     public void play() {
-
-        boolean isConnect4 = false;
-        boolean boardCompled = false;
-
-        board.iniciateBoard();
-        turn.setFirstPlayer();
-        board.printBoard();
         do {
-            turn.play();
-
-            board.printBoard();
-            isConnect4 = board.isConnect4(turn.currentToken());
-
-            if (!isConnect4) {
-                turn.changeTurnPlayer();
-            }
-
-            boardCompled = board.isCompleted();
-        } while (!isConnect4 && !boardCompled);
-
-        printEndMessage(isConnect4);
-
-        if (newPlay()) {
-            play();
-        }
-
+            this.playOneGame();
+        } while (this.wantToPlayAgain());
     }
 
-    private void printEndMessage(boolean isConnect4) {
-        if (isConnect4) {
-            view.writeln("Congratulations player " + turn.currentToken() + " you won!!");
-        } else {
-            view.writeln("Draw well played!!");
-        }
-    }
-
-    private boolean newPlay() {
+    private boolean wantToPlayAgain() {
         String answer;
-        view.writeln("Do you want to play othertime? Y/N");
-        answer = view.readString().toUpperCase();
-
+        this.view.writeln("Do you want to play othertime? Y/N");
+        answer = this.view.readString().toUpperCase();
         if (answer.equals("Y") || answer.equals("YES")) {
             return true;
         } else {
@@ -62,4 +31,30 @@ public class Connect4 {
         }
     }
 
+    private void playOneGame() {
+        boolean isConnect4 = false;
+        boolean boardCompled = false;
+        this.board.setBoardAsClean();
+        this.turn.setFirstPlayer();
+        this.board.printBoard();
+        do {
+            this.turn.play();
+            this.board.printBoard();
+            isConnect4 = this.board.isConnect4(this.turn.currentToken());
+            if (!isConnect4) {
+                this.turn.changeTurnPlayer();
+            }
+            boardCompled = this.board.isCompleted();
+        } while (!isConnect4 && !boardCompled);
+
+        this.printEndMessage(isConnect4);
+    }
+
+    private void printEndMessage(boolean isConnect4) {
+        if (isConnect4) {
+            this.view.writeln("Congratulations player " + this.turn.currentToken() + " you won!!");
+        } else {
+            this.view.writeln("Draw well played!!");
+        }
+    }
 }
