@@ -25,6 +25,9 @@ public class Turn {
     public Token currentToken() {
         return this.currentPlayer.getToken();
     }
+    public boolean isConnect4(){
+        return currentPlayer.isConnect4();
+    }
 
     private void createPlayers() {
         this.players = new Player[NUMBER_PLAYERS];

@@ -40,7 +40,7 @@ public class Connect4 {
         do {
             this.turn.play();
             this.board.printBoard();
-            isConnect4 = this.board.isConnect4(this.turn.currentToken());
+            isConnect4 = this.turn.isConnect4();
             if (!isConnect4) {
                 this.turn.changeTurnPlayer();
             }

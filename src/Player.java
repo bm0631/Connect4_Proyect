@@ -20,6 +20,9 @@ public class Player {
         column = this.getCoordinatesToPut();
         this.board.put(column, this.token);
     }
+    public boolean isConnect4(){
+        return board.isConnect4(this.token);
+    }
 
     private int getCoordinatesToPut() {
         int column;
