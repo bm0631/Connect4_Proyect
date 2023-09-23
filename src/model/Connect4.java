@@ -1,3 +1,7 @@
+package model;
+import utils.Console;
+import utils.View;
+
 public class Connect4 {
     private Board board;
     private Turn turn;

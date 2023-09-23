@@ -1,3 +1,6 @@
+package model;
+
+import utils.View;
 public class Board {
     private final int numberOfRows = 6;
     private final int numberOfColumns = 7;

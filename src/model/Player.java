@@ -1,4 +1,7 @@
+package model;
 import java.io.IOException;
+
+import utils.View;
 
 public class Player {
     private Token token;

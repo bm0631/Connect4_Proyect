@@ -1,5 +1,8 @@
+package model;
 import java.util.Arrays;
 import java.util.Random;
+
+import utils.View;
 
 public class Turn {
 

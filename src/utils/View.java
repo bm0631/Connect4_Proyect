@@ -1,3 +1,4 @@
+package utils;
 public interface View {
     public void write(String string);
 
