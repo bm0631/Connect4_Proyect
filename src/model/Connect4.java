@@ -14,7 +14,7 @@ public class Connect4 {
     }
 
     public static void main(String[] args) {
-        Connect4 connect4 = new Connect4();
+        Game connect4 = new Game();
         connect4.play();
     }
 

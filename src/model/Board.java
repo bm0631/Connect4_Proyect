@@ -141,4 +141,12 @@ public class Board {
         }
         return true;
     }
+
+    public int getnumberOfRows() {
+        return numberOfRows;
+    }
+     public int getnumberColumns() {
+        return numberOfColumns;
+    }
+    
 }

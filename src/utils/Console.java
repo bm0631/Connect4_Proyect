@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Console implements View {
     private static Console instance = new Console();
+    public static Object getInstance;
     private Scanner scanner = new Scanner((System.in));
 
     public static Console getInstance() {
