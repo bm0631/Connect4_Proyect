@@ -1,4 +1,5 @@
 package utils;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console implements View {
@@ -29,7 +30,10 @@ public class Console implements View {
     }
 
     public int readInt() {
-      return scanner.nextInt();
+      
+        int out=Integer.parseInt(this.scanner.nextLine());
+        
+      return out;
     }
 
     public String readString() {

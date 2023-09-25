@@ -4,21 +4,17 @@ import utils.Console;
 
 public class Input {
 
-    private static Input instance = new Input();
-    public static Object getInstance;
     
-    public static Input getInstance() {
-        return instance;
-    }
     public int readInt(){
-             int input = -1;
+             int input ;
+        do {
+            input = -1;
             try {
                 input = Console.getInstance().readInt();
             } catch (Exception exception) {
-                Out.ERROR_GENERAL.writeln();
-                this.readInt();
+                Out.ERROR_NUMBER.writeln();
             }
-        
+        } while (input < 0);
         return input;
     }
     public boolean readYesNo() {
@@ -26,7 +22,7 @@ public class Input {
             try {
                 input = Console.getInstance().readYesNo();
             } catch (Exception exception) {
-                Out.ERROR_GENERAL.writeln();
+                Out.ERROR_YES_NO.writeln();
                 this.readYesNo();
             }
             

@@ -12,7 +12,9 @@ public enum Out {
     SPACE(" "),
     ERROR_RANGE("COLUMN OUT OF RANGE"),
     ERROR_COLUMN_FULL("THIS COLUMNS IS FULL"),
-    ERROR_GENERAL("ERROR");
+    ERROR_NUMBER("ERROR NUMBER, select other:"),
+    ERROR_YES_NO("ERROR, only answer Y(YES) or N(NO):")
+    ;
 
     private String out;
 

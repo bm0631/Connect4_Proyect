@@ -8,7 +8,7 @@ public class AskNewGameView extends GameView {
     }
     boolean start(){
         Out.OTHERGAME.writeln();
-        return Input.getInstance().readYesNo();
+        return new Input().readYesNo();
     
     }
    

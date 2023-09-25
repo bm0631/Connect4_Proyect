@@ -15,17 +15,18 @@ public class PlayView extends GameView{
     }
     private void play() {
         Out.ASKCOLUMN.writeln();
-        int column =Input.getInstance().readInt();
+        int column =new Input().readInt();
         try {
             this.game.put(column);
         } catch (Connect4Exception e) {
             if (e.getMessage().equals("Out of range error ")){
                 Out.ERROR_RANGE.writeln();
+                 this.play();
             }else{
                 Out.ERROR_COLUMN_FULL.writeln();
             }
           
-           this.play();
+          
         }
     }
     
