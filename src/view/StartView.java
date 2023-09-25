@@ -10,7 +10,4 @@ public class StartView extends GameView{
         game.start();
     }
 
-    public static void main(String[] args) {
-    }
-
 }

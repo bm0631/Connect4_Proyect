@@ -1,16 +1,32 @@
 package view;
 import model.Game;
+import utils.Connect4Exception;
 public class PlayView extends GameView{
     PlayView(Game game){
         super(game);
     }
-    protected void start(){
+     void start(){
+        new BoardView(this.game).write();
         do{
-            this.game.play();
+            this.play();
+            this.game.next();
             new BoardView(this.game).write();
-            if (!game.isConnect4()){
-                game.nextPlayer();
-            }
         }while(!game.isEnd());
     }
+    private void play() {
+        Out.ASKCOLUMN.writeln();
+        int column =Input.getInstance().readInt();
+        try {
+            this.game.put(column);
+        } catch (Connect4Exception e) {
+            if (e.getMessage().equals("Out of range error ")){
+                Out.ERROR_RANGE.writeln();
+            }else{
+                Out.ERROR_COLUMN_FULL.writeln();
+            }
+          
+           this.play();
+        }
+    }
+    
 }

@@ -14,16 +14,25 @@ public class BoardView extends GameView{
         int heigthBoard=board.getnumberOfRows();
         int widthBoard=board.getnumberColumns();
 
-        for (int i = 0; i < heigthBoard; i++) {
-          
+        for (int i = heigthBoard-1; i >=0; i--) {
+            Out.writeCell(i);
             for (int j = 0; j < widthBoard; j++) {
-                Out.writeCell(new Coordinate(i,j));
+                Out.writeCell(game.getToken(new Coordinate(i,j)));
+                Out.COLUMN_SEPARATOR.write();
             }
-            
+            Out.SPACE.writeln();
         }
-        
 
-        }
+       writeFooter(widthBoard);
     }
+    private void writeFooter(int widthBoard){
+         Out.SPACE.write();
+         Out.SPACE.write();
+         for (int i = 0; i < widthBoard; i++) {
+                Out.writeCell(i);
+            }
+        Out.SPACE.writeln();
+    }
+}
 
   

@@ -12,6 +12,6 @@ public enum  Direction {
     
     private int row;
     private int column;
-    private 
+     
 
 }

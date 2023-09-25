@@ -1,15 +1,16 @@
 package model;
 
-import utils.View;
+import types.Coordinate;
+import utils.Connect4Exception;
 public class Board {
     private final int numberOfRows = 6;
     private final int numberOfColumns = 7;
     private Token tokens[][];
-    private View view;
+    private Coordinate lastCoordenate;
+    
 
-    public Board(View view) {
+    public Board( ) {
         this.tokens = new Token[this.numberOfRows][this.numberOfColumns];
-        this.view = view;
     }
 
     public void setBoardAsClean() {
@@ -21,9 +22,6 @@ public class Board {
     }
 
     public boolean isConnect4(Token tokenSeach) {
-        /**boolean out = checkHorizontal(tokenSeach) || checkVertical(tokenSeach)
-         || checkAscendDiagonal(tokenSeach) || checkDescendDiagonal(tokenSeach);
-         return out;**/
         boolean isConnect4 = false;
         for (int row = 0; row < this.numberOfRows; row++) {
             for (int column = 0; column < this.numberOfColumns; column++) {
@@ -36,6 +34,11 @@ public class Board {
                     return isConnect4;
             }
         }
+        return false;
+    }
+    //TODO
+    public boolean isConnect4(){
+        //Usar lastCoorde que se guarda
         return false;
     }
 
@@ -85,6 +88,7 @@ public class Board {
         }
         int row = firtsEmptyRow(column);
         this.tokens[row][column] = tokenToPut;
+       this.lastCoordenate = new Coordinate(row, column);
     }
 
     private int firtsEmptyRow(int column) throws Connect4Exception {
@@ -96,40 +100,6 @@ public class Board {
         throw new Connect4Exception("Full Column");
     }
 
-    public void printBoard() {
-        this.view.writeln();
-
-        printBoardRows();
-
-        this.view.write("  ");
-
-        printBoardFooter();
-
-        this.view.writeln();
-    }
-
-    private void printBoardRows() {
-        for (int i = this.numberOfRows - 1; i >= 0; i--) {
-            this.view.write(i);
-            this.view.write("|");
-            printBoardRow(i);
-            this.view.writeln();
-        }
-    }
-
-    private void printBoardRow(int idRow) {
-        for (int i = 0; i < this.numberOfColumns; i++) {
-            this.view.write(this.tokens[idRow][i].toString());
-            this.view.write("|");
-        }
-    }
-
-    private void printBoardFooter() {
-        for (int i = 0; i < this.numberOfColumns; i++) {
-            this.view.write(i);
-            this.view.write("|");
-        }
-    }
 
     public boolean isCompleted() {
         for (int i = 0; i < this.numberOfRows; i++) {
@@ -147,6 +117,10 @@ public class Board {
     }
      public int getnumberColumns() {
         return numberOfColumns;
+    }
+
+    public Token getToken(Coordinate coordinate) {
+        return tokens[coordinate.getRow()][coordinate.getColumn()];
     }
     
 }

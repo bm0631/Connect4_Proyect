@@ -1,38 +1,52 @@
 package model;
 
+import types.Coordinate;
+import utils.Connect4Exception;
 
 public class Game {
     private Board board;
-    //private Turn turn;
+    private Turn turn;
 
     public Game() {
-        //this.board = new Board();
-        //this.turn = new Turn(this.board);
+        this.board = new Board();
+        this.turn = new Turn(this.board);
     }
 
-   public void start(){
+    public void start() {
+        this.board.setBoardAsClean();
+        this.turn.setFirstPlayer();
+    }
 
-   }
+    public void next() {
+        this.turn.changeTurnPlayer();
+    }
+
    public boolean isEnd(){
-    return false;
-    //LLamar a conecta 4 y tablero full
+    return this.isCompleted() || this.isConnect4();
    }
-   public boolean isConnect4(){
-    return false;
-    // chequear conecta 4
+
+    public boolean isConnect4() {
+        return this.board.isConnect4();
     }
 
-public Board getBoard() {
-    return this.board;
-}
+    public boolean isCompleted() {
+        return this.board.isCompleted();
+    }
 
-public void play() {
-}
+    public Board getBoard() {
+        return this.board;
+    }
 
-public void nextPlayer() {
-}
+    public Token getCurrentToken() {
+         return this.turn.currentToken();
+    }
 
+    public Token getToken(Coordinate coordinate) {
+        return this.board.getToken(coordinate);
+    }
 
+    public void put(int column) throws Connect4Exception {
+        this.board.put(column, turn.currentToken());
+    }
 
-   
 }
