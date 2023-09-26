@@ -9,9 +9,4 @@ public enum  Direction {
     NORTHEAST, 
     SOUTHWEST, 
     SOUTHEAST;
-    
-    private int row;
-    private int column;
-     
-
 }

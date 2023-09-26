@@ -9,8 +9,8 @@ public class Connect4 {
 
     public Connect4() {
         this.view = Console.getInstance();
-        this.board = new Board(this.view);
-        this.turn = new Turn(this.board, this.view);
+        this.board = new Board();
+        this.turn = new Turn(this.board);
     }
 
     public static void main(String[] args) {
@@ -44,7 +44,7 @@ public class Connect4 {
         do {
             this.turn.play();
             this.board.printBoard();
-            isConnect4 = this.turn.isConnect4();
+            isConnect4 = this.board.isConnect4();
             if (!isConnect4) {
                 this.turn.changeTurnPlayer();
             }

@@ -1,89 +1,59 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import types.Coordinate;
+import types.Direction;
 import utils.Connect4Exception;
+import utils.Console;
 public class Board {
-    private final int numberOfRows = 6;
-    private final int numberOfColumns = 7;
+    public static final int numberOfRows = 6;
+    public static final int numberOfColumns = 7;
     private Token tokens[][];
     private Coordinate lastCoordenate;
     
 
     public Board( ) {
-        this.tokens = new Token[this.numberOfRows][this.numberOfColumns];
+        this.tokens = new Token[Board.numberOfRows][Board.numberOfColumns];
     }
 
     public void setBoardAsClean() {
-        for (int x = 0; x < this.numberOfColumns; x++) {
-            for (int y = 0; y < this.numberOfRows; y++) {
+        for (int x = 0; x < Board.numberOfColumns; x++) {
+            for (int y = 0; y < Board.numberOfRows; y++) {
                 this.tokens[y][x] = Token.NULL_TOKEN;
             }
         }
     }
 
-    public boolean isConnect4(Token tokenSeach) {
-        boolean isConnect4 = false;
-        for (int row = 0; row < this.numberOfRows; row++) {
-            for (int column = 0; column < this.numberOfColumns; column++) {
-                if (tokenSeach == this.tokens[row][column]) {
-                    isConnect4 = checkHorizontal(row, column, tokenSeach) || checkVertical(row, column, tokenSeach)
-                            || checkAscendDiagonal(row, column, tokenSeach) || checkDescendDiagonal(row, column, tokenSeach);
-
+    public boolean isConnect4(){
+        Console.getInstance().writeln(this.lastCoordenate.toString());
+        List<Line> lines = this.createLinesToCheck();
+        for (Line line : lines) {
+            int count = 0;
+            for(int i = 0; i < 4; i++){
+                if(line.getCoordinate().isValid() && this.getToken(line.getCoordinate()) == tokens[this.lastCoordenate.getRow()][this.lastCoordenate.getColumn()]){
+                    count++;
                 }
-                if (isConnect4)
-                    return isConnect4;
+                line.move();
+            }
+            if(count == 4){
+                return true;
             }
         }
         return false;
     }
-    //TODO
-    public boolean isConnect4(){
-        //Usar lastCoorde que se guarda
-        return false;
-    }
 
-    private boolean checkHorizontal(int row, int column, Token tokenSeach) {
-        if (column + 3 < this.numberOfColumns) {
-            return tokenSeach == this.tokens[row][column + 1] &&
-                    tokenSeach == this.tokens[row][column + 2] &&
-                    tokenSeach == this.tokens[row][column + 3];
-        } else {
-            return false;
+    private List<Line> createLinesToCheck() {
+        List<Line> lines = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            lines.add(new Line(this.lastCoordenate, direction));
         }
-    }
-
-    private boolean checkVertical(int row, int column, Token tokenSeach) {
-        if (row + 3 < this.numberOfRows) {
-            return tokenSeach == this.tokens[row + 1][column] &&
-                    tokenSeach == this.tokens[row + 2][column] &&
-                    tokenSeach == this.tokens[row + 3][column];
-        } else {
-            return false;
-        }
-    }
-
-    private boolean checkAscendDiagonal(int row, int column, Token tokenSeach) {
-        if (row + 3 < this.numberOfRows && column + 3 < this.numberOfColumns) {
-            return tokenSeach == this.tokens[row + 1][column + 1] &&
-                    tokenSeach == this.tokens[row + 2][column + 2] &&
-                    tokenSeach == this.tokens[row + 3][column + 3];
-        } else {
-            return false;
-        }
-    }
-
-    private boolean checkDescendDiagonal(int row, int column, Token tokenSeach) {
-        if (row + 3 < this.numberOfRows && column - 3 >= 0) {
-            return tokenSeach == this.tokens[row + 1][column - 1] &&
-                    tokenSeach == this.tokens[row + 2][column - 2] &&
-                    tokenSeach == this.tokens[row + 3][column - 3];
-        } else {
-            return false;
-        }
+        return lines;
     }
 
     public void put(int column, Token tokenToPut) throws Connect4Exception {
-        if (column > this.numberOfColumns - 1 || column < 0) {
+        if (column > Board.numberOfColumns - 1 || column < 0) {
             throw new Connect4Exception("Out of range error ");
         }
         int row = firtsEmptyRow(column);
@@ -92,7 +62,7 @@ public class Board {
     }
 
     private int firtsEmptyRow(int column) throws Connect4Exception {
-        for (int i = 0; i < this.numberOfRows; i++) {
+        for (int i = 0; i < Board.numberOfRows; i++) {
             if (this.tokens[i][column].isNull()) {
                 return i;
             }
@@ -102,7 +72,7 @@ public class Board {
 
 
     public boolean isCompleted() {
-        for (int i = 0; i < this.numberOfColumns; i++) {
+        for (int i = 0; i < Board.numberOfColumns; i++) {
             if (this.tokens[0][i].isNull()) {
                 return false;
             }
@@ -113,12 +83,13 @@ public class Board {
     public int getnumberOfRows() {
         return numberOfRows;
     }
-     public int getnumberColumns() {
+
+    public int getnumberColumns() {
         return numberOfColumns;
     }
 
     public Token getToken(Coordinate coordinate) {
         return tokens[coordinate.getRow()][coordinate.getColumn()];
     }
-    
+        
 }
