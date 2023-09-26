@@ -102,11 +102,9 @@ public class Board {
 
 
     public boolean isCompleted() {
-        for (int i = 0; i < this.numberOfRows; i++) {
-            for (int j = 0; j < this.numberOfColumns; j++) {
-                if (this.tokens[i][j].isNull()) {
-                    return false;
-                }
+        for (int i = 0; i < this.numberOfColumns; i++) {
+            if (this.tokens[0][i].isNull()) {
+                return false;
             }
         }
         return true;
