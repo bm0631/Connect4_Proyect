@@ -1,8 +1,10 @@
 package utils;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console implements View {
     private static Console instance = new Console();
+    public static Object getInstance;
     private Scanner scanner = new Scanner((System.in));
 
     public static Console getInstance() {
@@ -28,16 +30,10 @@ public class Console implements View {
     }
 
     public int readInt() {
-        int input = -1;
-        do {
-            try {
-                input = scanner.nextInt();
-            } catch (Exception exception) {
-                System.out.println("Error, Try again " + exception.getMessage());
-                scanner.next();
-            }
-        } while (input < -1);
-        return input;
+      
+        int out=Integer.parseInt(this.scanner.nextLine());
+        
+      return out;
     }
 
     public String readString() {
@@ -55,5 +51,19 @@ public class Console implements View {
     public void writeError(String message) {
         System.err.print("Error, Try again " + message);
         this.writeln();
+    }
+
+    public boolean readYesNo() throws Connect4Exception{
+         String input = new String("");
+       
+        input = scanner.next().trim().toUpperCase();
+        if (input.equals("YES")||input.equals("Y")){
+            return true;
+        }else if(input.equals("NO")||input.equals("N")){
+            return false;
+        }else{
+            throw new Connect4Exception("YES NO ERROR");
+        }
+       
     }
 }
