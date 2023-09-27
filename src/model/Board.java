@@ -31,13 +31,13 @@ public class Board {
         List<Line> lines = this.createLinesToCheck();
         for (Line line : lines) {
             int count = 0;
-            for(int i = 0; i < 4; i++){
-                if(line.getCoordinate().isValid() && this.getToken(line.getCoordinate()) == tokens[this.lastCoordenate.getRow()][this.lastCoordenate.getColumn()]){
+            for(int i = 0; i < 4; i++) {
+                if(line.getCoordinate().isValid() && this.getToken(line.getCoordinate()) == this.getToken(this.lastCoordenate)) {
                     count++;
                 }
                 line.move();
             }
-            if(count == 4){
+            if(count == 4) {
                 return true;
             }
         }
@@ -58,7 +58,7 @@ public class Board {
         }
         int row = firtsEmptyRow(column);
         this.tokens[row][column] = tokenToPut;
-       this.lastCoordenate = new Coordinate(row, column);
+        this.lastCoordenate = new Coordinate(row, column);
     }
 
     private int firtsEmptyRow(int column) throws Connect4Exception {

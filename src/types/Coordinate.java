@@ -10,42 +10,17 @@ public class Coordinate {
         this.row=row;
         this.column=column;
     }
-    public void move(Direction direction){
-        switch (direction){
-            case NORTH:
-                this.row--;
-                break;
-            case SOUTH:
-                this.row++;
-                break;
-            case EAST:
-                this.column++;
-                break;
-            case WEST:
-                this.column--;
-                break;
-            case NORTHEAST:
-                this.row--;
-                this.column++;
-                break;
-            case NORTHWEST:
-                this.row--;
-                this.column--;
-                break;
-            case SOUTHEAST:
-                this.row++;
-                this.column++;
-                break;
-            case SOUTHWEST:
-                this.row++;
-                this.column--;
-                break;
-        }
+
+    public void move(Direction direction) {
+        int[] moveOffset = direction.getMoveOffset();
+        this.row += moveOffset[0];
+        this.column += moveOffset[1];
     }
 
     public int getRow(){
         return this.row;
     }
+    
     public int getColumn(){
         return this.column;
     }
