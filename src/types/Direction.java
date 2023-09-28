@@ -19,6 +19,6 @@ public enum Direction {
     }
 
     public int[] getMoveOffset() {
-        return new int[]{rowOffset, columnOffset};
+        return new int[] { rowOffset, columnOffset };
     }
 }

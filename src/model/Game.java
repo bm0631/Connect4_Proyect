@@ -18,7 +18,7 @@ public class Game {
         this.turn.setFirstPlayer();
     }
 
-    public void next() {
+    public void nextPlayer() {
         this.turn.changeTurnPlayer();
     }
 

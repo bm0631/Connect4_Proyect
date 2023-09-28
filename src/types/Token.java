@@ -1,4 +1,5 @@
 package types;
+
 public enum Token {
     X_TOKEN, O_TOKEN, NULL_TOKEN;
 
@@ -21,8 +22,9 @@ public enum Token {
     public boolean isNull() {
         return this == NULL_TOKEN;
     }
-    public static Token getTokenIndex(int i){
-         switch (i) {
+
+    public static Token getTokenIndex(int i) {
+        switch (i) {
             case 0: {
                 return Token.X_TOKEN;
             }

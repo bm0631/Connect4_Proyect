@@ -4,19 +4,19 @@ import types.Coordinate;
 import types.Direction;
 
 public class Line {
-    private Coordinate initialCoordinate;
+    private Coordinate actualCoordinate;
     private Direction direction;
 
     public Line(Coordinate initialCoordinate, Direction direction) {
-        this.initialCoordinate = initialCoordinate;
+        this.actualCoordinate = initialCoordinate;
         this.direction = direction;
     }
 
     public Coordinate getCoordinate() {
-        return this.initialCoordinate;
+        return this.actualCoordinate;
     }
 
-    public void move() {
-        this.initialCoordinate.move(this.direction);
+    public void next() {
+        this.actualCoordinate.move(this.direction);
     }
 }

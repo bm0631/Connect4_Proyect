@@ -7,8 +7,8 @@ public class Coordinate {
     private int column;
 
     public Coordinate(int row, int column) {
-        this.row=row;
-        this.column=column;
+        this.row = row;
+        this.column = column;
     }
 
     public void move(Direction direction) {
@@ -17,16 +17,17 @@ public class Coordinate {
         this.column += moveOffset[1];
     }
 
-    public int getRow(){
+    public int getRow() {
         return this.row;
     }
-    
-    public int getColumn(){
+
+    public int getColumn() {
         return this.column;
     }
 
-    public boolean isValid(){
-        return this.row >= 0 && this.column >= 0 && this.row < Board.getnumberOfRows() && this.column < Board.getnumberColumns();
+    public boolean isValid() {
+        return this.row >= 0 && this.column >= 0 && this.row < Board.getnumberOfRows()
+                && this.column < Board.getnumberColumns();
     }
 
 }

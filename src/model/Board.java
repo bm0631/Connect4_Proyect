@@ -36,7 +36,7 @@ public class Board {
                         && this.getToken(line.getCoordinate()) == this.getToken(this.lastCoordenate)) {
                     count++;
                 }
-                line.move();
+                line.next();
             }
             if (count == 4) {
                 return true;
@@ -48,8 +48,9 @@ public class Board {
     private List<Line> createLinesToCheck() {
         List<Line> lines = new ArrayList<>();
         for (Direction direction : Direction.values()) {
-            Coordinate coordinateCopy = new Coordinate(this.lastCoordenate.getRow(), this.lastCoordenate.getColumn());
-            lines.add(new Line(coordinateCopy, direction));
+            Coordinate initialCoordinate = new Coordinate(this.lastCoordenate.getRow(),
+                    this.lastCoordenate.getColumn());
+            lines.add(new Line(initialCoordinate, direction));
         }
         return lines;
     }
@@ -74,7 +75,7 @@ public class Board {
 
     public boolean isCompleted() {
         for (int i = 0; i < Board.numberOfColumns; i++) {
-            if (this.tokens[this.tokens.length-1][i].isNull()) {
+            if (this.tokens[this.tokens.length - 1][i].isNull()) {
                 return false;
             }
         }

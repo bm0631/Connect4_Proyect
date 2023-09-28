@@ -8,7 +8,7 @@ public enum OutPut {
     WINGAME(", WIN GAME!!"),
     DRAWGAME("DRAW WELL PLAYED!!"),
     OTHERGAME("DO YOU WANT PLAY OTHER GAME? Y/N"),
-    ASKCOLUMN("Select a column to put a token:"),
+    ASKCOLUMN(", Select a column to put a token:"),
     ERRORCOLUMN("THIS COLUMN IS FULL, TRY OTHER?"),
     COLUMN_SEPARATOR("|"),
     SPACE(" "),
@@ -31,6 +31,11 @@ public enum OutPut {
         this.write();
         Console.getInstance().writeln();
     }
+    public void writeln(Token actualPlayer) {
+        assert (this == OutPut.ASKCOLUMN || this == OutPut.WINGAME);
+        OutPut.writeCell(actualPlayer);
+        Console.getInstance().write(this.out);
+    }
 
     public static void writeCell(Token token) {
         Console.getInstance().write(token.toString());
@@ -42,9 +47,7 @@ public enum OutPut {
     }
 
     public void writeWin(Token winner) {
-        assert this == OutPut.WINGAME;
-        OutPut.writeCell(winner);
-        Console.getInstance().write(this.out);
+       this.writeln(winner);
     }
 
 }
