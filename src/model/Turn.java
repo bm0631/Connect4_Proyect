@@ -1,7 +1,7 @@
 package model;
 import java.util.Arrays;
 import java.util.Random;
-
+import types.Token;
 
 public class Turn {
 

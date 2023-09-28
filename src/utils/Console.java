@@ -1,8 +1,7 @@
 package utils;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Console implements View {
+public class Console  {
     private static Console instance = new Console();
     public static Object getInstance;
     private Scanner scanner = new Scanner((System.in));

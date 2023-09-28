@@ -3,36 +3,35 @@ package view;
 import model.Board;
 import model.Game;
 import types.Coordinate;
-public class BoardView extends GameView{
+
+public class BoardView extends GameView {
 
     public BoardView(Game game) {
         super(game);
     }
 
     public void write() {
-        Board board=game.getBoard();
-        int heigthBoard=board.getnumberOfRows();
-        int widthBoard=board.getnumberColumns();
+        int heigthBoard = Board.getnumberOfRows();
+        int widthBoard = Board.getnumberColumns();
 
-        for (int i = heigthBoard-1; i >=0; i--) {
-            Out.writeCell(i);
+        for (int i = heigthBoard - 1; i >= 0; i--) {
+            OutPut.writeCell(i);
             for (int j = 0; j < widthBoard; j++) {
-                Out.writeCell(game.getToken(new Coordinate(i,j)));
-                Out.COLUMN_SEPARATOR.write();
+                OutPut.writeCell(game.getToken(new Coordinate(i, j)));
+                OutPut.COLUMN_SEPARATOR.write();
             }
-            Out.SPACE.writeln();
+            OutPut.SPACE.writeln();
         }
 
-       writeFooter(widthBoard);
+        writeFooter(widthBoard);
     }
-    private void writeFooter(int widthBoard){
-         Out.SPACE.write();
-         Out.SPACE.write();
-         for (int i = 0; i < widthBoard; i++) {
-                Out.writeCell(i);
-            }
-        Out.SPACE.writeln();
+
+    private void writeFooter(int widthBoard) {
+        OutPut.SPACE.write();
+        OutPut.SPACE.write();
+        for (int i = 0; i < widthBoard; i++) {
+            OutPut.writeCell(i);
+        }
+        OutPut.SPACE.writeln();
     }
 }
-
-  

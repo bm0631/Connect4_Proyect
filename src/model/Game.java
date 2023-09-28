@@ -1,6 +1,7 @@
 package model;
 
 import types.Coordinate;
+import types.Token;
 import utils.Connect4Exception;
 
 public class Game {
@@ -21,9 +22,9 @@ public class Game {
         this.turn.changeTurnPlayer();
     }
 
-   public boolean isEnd(){
-    return this.isCompleted() || this.isConnect4();
-   }
+    public boolean isEnd() {
+        return this.isCompleted() || this.isConnect4();
+    }
 
     public boolean isConnect4() {
         return this.board.isConnect4();
@@ -38,7 +39,7 @@ public class Game {
     }
 
     public Token getCurrentToken() {
-         return this.turn.currentToken();
+        return this.turn.currentToken();
     }
 
     public Token getToken(Coordinate coordinate) {

@@ -26,7 +26,7 @@ public class Coordinate {
     }
 
     public boolean isValid(){
-        return this.row >= 0 && this.column >= 0 && this.row < Board.numberOfRows && this.column < Board.numberOfColumns;
+        return this.row >= 0 && this.column >= 0 && this.row < Board.getnumberOfRows() && this.column < Board.getnumberColumns();
     }
 
 }

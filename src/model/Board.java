@@ -6,15 +6,15 @@ import java.util.List;
 import types.Coordinate;
 import types.Direction;
 import utils.Connect4Exception;
-import utils.Console;
+import types.Token;
+
 public class Board {
-    public static final int numberOfRows = 6;
-    public static final int numberOfColumns = 7;
+    private static final int numberOfRows = 6;
+    private static final int numberOfColumns = 7;
     private Token tokens[][];
     private Coordinate lastCoordenate;
-    
 
-    public Board( ) {
+    public Board() {
         this.tokens = new Token[Board.numberOfRows][Board.numberOfColumns];
     }
 
@@ -26,18 +26,19 @@ public class Board {
         }
     }
 
-    public boolean isConnect4(){
-        Console.getInstance().writeln(this.lastCoordenate.toString());
+    public boolean isConnect4() {
+
         List<Line> lines = this.createLinesToCheck();
         for (Line line : lines) {
             int count = 0;
-            for(int i = 0; i < 4; i++) {
-                if(line.getCoordinate().isValid() && this.getToken(line.getCoordinate()) == this.getToken(this.lastCoordenate)) {
+            for (int i = 0; i < 4; i++) {
+                if (line.getCoordinate().isValid()
+                        && this.getToken(line.getCoordinate()) == this.getToken(this.lastCoordenate)) {
                     count++;
                 }
                 line.move();
             }
-            if(count == 4) {
+            if (count == 4) {
                 return true;
             }
         }
@@ -70,7 +71,6 @@ public class Board {
         throw new Connect4Exception("Full Column");
     }
 
-
     public boolean isCompleted() {
         for (int i = 0; i < Board.numberOfColumns; i++) {
             if (this.tokens[0][i].isNull()) {
@@ -80,16 +80,16 @@ public class Board {
         return true;
     }
 
-    public int getnumberOfRows() {
+    public static int getnumberOfRows() {
         return numberOfRows;
     }
 
-    public int getnumberColumns() {
+    public static int getnumberColumns() {
         return numberOfColumns;
     }
 
     public Token getToken(Coordinate coordinate) {
         return tokens[coordinate.getRow()][coordinate.getColumn()];
     }
-        
+
 }
