@@ -48,7 +48,8 @@ public class Board {
     private List<Line> createLinesToCheck() {
         List<Line> lines = new ArrayList<>();
         for (Direction direction : Direction.values()) {
-            lines.add(new Line(this.lastCoordenate, direction));
+            Coordinate coordinateCopy = new Coordinate(this.lastCoordenate.getRow(), this.lastCoordenate.getColumn());
+            lines.add(new Line(coordinateCopy, direction));
         }
         return lines;
     }
@@ -73,7 +74,7 @@ public class Board {
 
     public boolean isCompleted() {
         for (int i = 0; i < Board.numberOfColumns; i++) {
-            if (this.tokens[0][i].isNull()) {
+            if (this.tokens[this.tokens.length-1][i].isNull()) {
                 return false;
             }
         }
